@@ -4,8 +4,6 @@ import { Container } from "./styles";
 
 export function WebcamCapture() {
   const videoConstraints = {
-    width: 200,
-    height: 200,
     facingMode: 'user',
   }
   const [imgSrc, setImgSrc] = useState('')
@@ -13,7 +11,7 @@ export function WebcamCapture() {
   const webcamRef = useRef<any>(null)
   const capture = useCallback(
     () => {
-      const imageSrc = webcamRef.current.getScreenshot({width: 640, height: 480})
+      const imageSrc = webcamRef.current.getScreenshot()
       console.log(imageSrc)
       setImgSrc(imageSrc)
     },
@@ -33,13 +31,11 @@ export function WebcamCapture() {
     <Container>
       <Webcam
         audio={false}
-        width={200}
-        height={200}
         ref={webcamRef}
         screenshotFormat="image/png"
         videoConstraints={videoConstraints}
       />
-      <button onClick={capture}>Capture photo</button>
+      <button onClick={capture}>Capturar imagem</button>
       
       {imgSrc && (
         <>
